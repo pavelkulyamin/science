@@ -193,18 +193,13 @@ void FemtoDstAnalyzer_QVector_Recent (const Char_t *inFile = "st_physics_1215000
     } //for(Int_t iTrk=0; iTrk<nTracks; iTrk++)
 
     //Event plane and Q
-    //Qx2_rec = Qx2 - p_Qx2 -> GetBinContent(event -> cent9() + 1, event -> runId() - 12120001);
-    //Qy2_rec = Qy2 - p_Qy2 -> GetBinContent(event -> cent9() + 1, event -> runId() - 12120001);
-    //Qx3_rec = Qx3 - p_Qx3 -> GetBinContent(event -> cent9() + 1, event -> runId() - 12120001);
-    //Qy3_rec = Qy3 - p_Qy3 -> GetBinContent(event -> cent9() + 1, event -> runId() - 12120001);
+    Qx2_rec = Qx2 - p_Qx2 -> GetBinContent(p_Qx2 -> FindBin(event -> runId(),event -> cent9()));
 
-    Qx2_rec = Qx2 - p_Qx2 -> GetBinContent(p_Qx2 -> FindBin(event -> runId()) , p_Qx2 -> FindBin(event -> cent9()));
+    Qy2_rec = Qy2 - p_Qy2 -> GetBinContent(p_Qy2 -> FindBin(event -> runId(),event -> cent9()));
 
-    Qy2_rec = Qy2 - p_Qy2 -> GetBinContent(p_Qx2 -> FindBin(event -> runId()) , p_Qy2 -> FindBin(event -> cent9()));
+    Qx3_rec = Qx3 - p_Qx3 -> GetBinContent(p_Qx3 -> FindBin(event -> runId(),event -> cent9()));
 
-    Qx3_rec = Qx3 - p_Qx3 -> GetBinContent(p_Qx3 -> FindBin(event -> runId()) , p_Qy3 -> FindBin(event -> cent9()));
-
-    Qy3_rec = Qy3 - p_Qy3 -> GetBinContent(p_Qx3 -> FindBin(event -> runId()) , p_Qy3 -> FindBin(event -> cent9()));
+    Qy3_rec = Qy3 - p_Qy3 -> GetBinContent(p_Qy3 -> FindBin(event -> runId(),event -> cent9()));
 
     Phy2Rec = 1.0/2.0 * ( TMath :: ATan2 ( Qy2_rec , Qx2_rec ) );
 
@@ -215,7 +210,7 @@ void FemtoDstAnalyzer_QVector_Recent (const Char_t *inFile = "st_physics_1215000
     Phy3 = 1.0 /3.0 * ( TMath :: ATan2( Qy3 , Qx3 ) );
    
     //Filling profile
-
+    
     //Filling histograms
 
     H_Qx2_rec -> Fill(Qx2_rec);
